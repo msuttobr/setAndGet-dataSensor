@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Usuário</title>
+
+    <link rel="stylesheet" href="./css/cadastro_login.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="./index.html">
+                        <img src="img/logo.png" width="100%">
+                    </a>
+                </div>
+                <div class="navigation">
+                    <ul>
+                        <li><a href="./index.html#quem-somos">Quem somos</a></li>
+                        <li><a href="./index.html#proposito">Propósito</a></li>
+                        <li><a href="./simulador-financeiro.html">Simulador Financeiro</a></li>
+                        <li><a href="./login.html">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="conteudo">
+        <div class="cadastro_usuario">
+            <h1>CADASTRAR USUÁRIO</h1>
+            <div>
+                Digite um nome de usuário <br>
+                <input id="ipt_nome_usuario" type="text" placeholder="usuário">
+            </div>
+            <div>
+                Digite um email <br>
+                <input id="ipt_email_usuario" type="text" placeholder="e-mail">
+            </div>
+            <div>
+                Crie uma senha <br>
+                <input id="ipt_senha_usuario" type="password" placeholder="senha">
+            </div>
+
+            <button class="button" onclick="cadastrar()">CADASTRAR</button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    // variáveis globais para armazenar os dados cadastrados
+    var ax_nome_usuario = 0;
+    var ax_email_usuario = 0;
+    var ax_senha_usuario = 0;
+
+    function cadastrar() {
+        // variáveis booleanas para validar os campos de entrada
+        var ax_nome_usuario_OK = ipt_nome_usuario.value.length >= 4;
+        var ax_email_usuario_OK = ipt_email_usuario.value.length >= 6 && ipt_email_usuario.value.includes("@");
+        var ex_senha_usuario_OK = ipt_senha_usuario.value.length >= 6;
+
+        // condições para que os campos sejam válidos
+        if (ax_nome_usuario_OK == false) {
+            alert("O nome do usuário precisa conter ao menos 4 caracteres!")
+        }
+
+        else if (ax_email_usuario_OK == false) {
+            alert("E-mail inválido!")
+        }
+
+        else if (ex_senha_usuario_OK == false) {
+            alert("A senha precisa ter no mínimo 6 caracteres!");
+        }
+
+        else {
+            // armazenando as campos nas variáveis glovais após validação
+            ax_nome_usuario = ipt_nome_usuario.value;
+            ax_email_usuario = ipt_email_usuario.value;
+            ax_senha_usuario = ipt_senha_usuario.value;
+
+            // zerando os campos de entrada
+            ipt_nome_usuario.value = "";
+            ipt_email_usuario.value = "";
+            ipt_senha_usuario.value = "";
+
+            alert("Usuário cadastrado com sucesso")
+        }
+    }
+</script>

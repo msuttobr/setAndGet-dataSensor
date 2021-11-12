@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    text-shadow: black 2px 2px 2px;
+    font-weight: bolder;
+}
+.container {
+    max-width: 1140px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+.container > .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-content .logo {
+    width: 100px;
+    height: 100px;
+}
+.header-content  .navigation {
+}
+.header-content > .navigation > ul {
+    display: flex;
+    list-style-type: none;
+}
+.header-content > .navigation ul li a {
+    display: block;
+    text-decoration: none;
+    padding: 16px;
+    font-size: 24px;
+    color: #7F7F7F;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.section {
+    padding: 20px 0;
+    background-color: rgb(182, 221, 232);
+    justify-content: center;
+}
+.section .inside {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+}
+.section .inside .intro button {
+    margin-top: 8px;
+    padding: 8px 32px;
+    width: 100%;
+    background-color: #6CAE3F;
+    color: #FFFFFF;
+    font-size: 1.5em;
+    border-radius: 8px;
+    cursor: pointer;
+    border-style: none;
+    box-shadow: rgb(80 90 80) 5px 5px 5px;
+    text-transform: uppercase;
+}
+.section .inside .intro {
+    margin: 22px;
+}
+.section .inside .intro input {
+    width: 400px;
+    border-color: transparent;
+    height: 40px;
+    text-shadow: transparent 2px 2px 2px;
+    color: rgb(128, 128, 128);
+    border-radius: 10px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+.section .graficos .title {
+    display: flex;
+    justify-content: space-around;
+}
+.section .graficos {
+    margin: 30px;
+}
+.p_indoor {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0px;
+    align-items: center;
+}
+
+.p_indoor .color {
+    position: relative;
+    width: 700px;
+    height: 60px;
+    font-size: 22px;
+}
+.color {
+    width: 600px;
+    height: 50px;
+    background-color: rgb(233, 147, 187);
+    margin: 0px 15px 0px 15px;
+    display: flex;
+}
+.div_left_text_comum {
+    font-size: 25px;
+    width: 15%;
+    text-align: right;
+}
+.div_right_text_indoor {
+    font-size: 25px;
+    width: 15%;
+} 
+.color_red {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1px;
+
+}
+
+.div_text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

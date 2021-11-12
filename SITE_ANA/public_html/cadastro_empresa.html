@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Empresa</title>
+
+    <link rel="stylesheet" href="./css/cadastro_login.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="./index.html">
+                        <img src="img/logo.png" width="100%">
+                    </a>
+                </div>
+                <div class="navigation">
+                    <ul>
+                        <li><a href="./index.html#quem-somos">Quem somos</a></li>
+                        <li><a href="./index.html#proposito">Propósito</a></li>
+                        <li><a href="./simulador-financeiro.html">Simulador Financeiro</a></li>
+                        <li><a href="./login.html">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="conteudo">
+        <div class="cadastro_empresa">
+            <h1>CADASTRAR EMPRESA</h1>
+            <div>
+                Digite o nome da empresa <br>
+                <input id="ipt_nome_empresa" type="text" placeholder="usuário">
+            </div>
+            <div>
+                Digite o CNPJ da empresa <br>
+                <input id="ipt_CNPJ_empresa" type="text" placeholder="somente números">
+            </div>
+            <div>
+                Crie uma senha <br>
+                <input id="ipt_senha_empresa" type="password" placeholder="senha">
+            </div>
+
+            <button class="button" onclick="cadastrar()">CADASTRAR</button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    // variáveis globais para armazenar os dados cadastrados
+    var ax_nome_empresa = 0;
+    var ax_CNPJ_empresa = 0;
+    var ax_senha_empresa = 0;
+
+    function cadastrar() {
+        // variáveis booleanas para validar os campos de entrada
+        var ax_nome_empresa_OK = ipt_nome_empresa.value.length >= 4;
+        var ax_CNPJ_OK = ipt_CNPJ_empresa.value.length == 14;
+        var ax_senha_empresa_OK = ipt_senha_empresa.value.length >= 6;
+
+        // condições para que os campos sejam válidos 
+        if (ax_nome_empresa_OK == false) {
+            alert("O nome da empresa precisa conter ao menos 4 caracteres!")
+        }
+
+        else if (ax_CNPJ_OK == false) {
+            alert("CNPJ precisa conter 14 dígitos, somente números")
+        }
+
+        else if (ax_senha_empresa_OK == false) {
+            alert("A senha precisa ter no mínimo 6 caracteres!");
+        }
+
+        else {
+            // armazenando as campos nas variáveis glovais após validação
+            ax_nome_empresa = ipt_nome_empresa.value;
+            ax_CNPJ_empresa = ipt_CNPJ_empresa.value;
+            ax_senha_empresa = ipt_senha_empresa.value;
+
+            // zerando os campos de entrada
+            ipt_nome_empresa.value = "";
+            ipt_CNPJ_empresa.value = "";
+            ipt_senha_empresa.value = "";
+
+            alert("Usuário cadastrado com sucesso")
+        }
+    }
+</script>

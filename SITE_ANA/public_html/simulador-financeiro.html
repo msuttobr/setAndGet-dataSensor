@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+    <link rel="stylesheet" href="css/simulador.css">
+</head>
+<body>
+    
+</body>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="./index.html">
+                        <img src="img/logo.png" width="100%">
+                    </a>
+                </div>
+                <div class="navigation">
+                    <ul>
+                        <li><a href="./index.html#quem-somos">Quem somos</a></li>
+                        <li><a href="./index.html#proposito">Propósito</a></li>
+                        <li><a href="#">Simulador Financeiro</a></li>
+                        <li><a href="./login.html">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="inside">
+            <div class="intro">
+                <h1>Quantos metros quadrados possui a Estufa?</h1>
+            </div>
+            <div class="intro">
+                <input id="tamanho_estufa" type="number" placeholder="Insira o tamanho da sua plantação em m²" >
+            </div>
+            <div class="intro">
+                <button onclick="O()">Simular Produção</button>
+            </div>
+        </div>
+        <div class="graficos" id="div_graficos">
+            <div class="title" id="div_titles" style="display: none;" >
+                <div id="title_comum"><h1>Estufa Hidrôponica Comum</h1></div>
+                <div id="title_indoor" ><h1>Estufa Hidrôponica Indoor</h1></div>
+            </div>
+        </div>
+        <div id="D4" class="D"></div>
+        </div>
+        
+    </div>
+    <div class="footer"></div>
+
+</html>
+<script>
+    function O() {
+        div_titles.style.display = 'flex';
+        var ax_estufa = tamanho_estufa.value;
+        
+        // Para calcular, consideramos: 20 pés de alface/m2 e 250 dias produtivos/anual
+        var ax_hidro_comum = Number(20)*tamanho_estufa.value*Number(250);
+        var ax_custo_comum = ax_hidro_comum*Number(0.28);
+        var ax_venda_comum = ax_hidro_comum*Number(1.00);
+        
+        // Para calcular, consideramos: 20 pés de alface/m2 e 300 dias produtivos/anual
+        var ax_hidro_indoor = Number(20)*tamanho_estufa.value*Number(300);
+        var ax_custo_indoor = ax_hidro_indoor*Number(0.48);
+        var ax_venda_indoor = ax_hidro_indoor*Number(1.50);
+    
+        D4.innerHTML = `
+            <!--Metros Quadrados-->
+            <div class="p_indoor"> 
+                <div class="div_left_text_comum">${ax_hidro_comum}</div>
+                <div class="color"> 
+                    <div class="color_blue" style="width: ${(ax_hidro_comum)*100/(ax_hidro_comum+ax_hidro_indoor)}%; background-color: rgb(155, 187, 89); height: 100%;"></div>
+                    <div class="color_red">
+                        <div class="div_text">${ax_estufa} Metros Quadrados</div>
+                    </div>
+                </div> 
+                <div class="div_right_text_indoor">${ax_hidro_indoor}</div>
+            </div> 
+
+            <!--Custo médio de produção por ano-->
+            <div class="p_indoor"> 
+                <div class="div_left_text_comum">${ax_custo_comum.toFixed(2)}</div>
+                <div class="color"> 
+                    <div class="color_blue" style="width: ${(ax_custo_comum)*100/(ax_custo_comum+ax_custo_indoor)}%; background-color: rgb(155, 187, 89); height: 100%;" ></div>
+                    <div class="color_red">
+                        <div class="div_text"> Custo médio de produção por ano </div>
+                    </div>
+                </div> 
+                <div class="div_right_text_indoor">${ax_custo_indoor.toFixed(2)}</div>
+            </div>      
+            
+            <!--Valor médio de Venda-->
+            <div class="p_indoor"> 
+                <div class="div_left_text_comum">${1.00}</div>
+                <div class="color"> 
+                    <div class="color_blue" style="width: ${100/2.5}%; background-color: rgb(155, 187, 89); height: 100%;" ></div>
+                    <div class="color_red">
+                        <div class="div_text"> Valor médio de Venda </div>
+                    </div>
+                </div>
+                <div class="div_right_text_indoor">${1.50}</div>
+            </div>
+
+            <!--Lucro Bruto-->
+            <div class="p_indoor"> 
+                <div class="div_left_text_comum">${ax_venda_comum.toFixed(2)}</div>
+                <div class="color"> 
+                    <div class="color_blue" style="width: ${(ax_venda_comum*100/(ax_venda_comum+ax_venda_indoor))}%; background-color: rgb(155, 187, 89); height: 100%;" ></div>
+                    <div class="color_red">
+                        <div class="div_text"> Lucro Bruto </div>
+                    </div>
+                </div> 
+                <div class="div_right_text_indoor">${ax_venda_indoor.toFixed(2)}</div>
+            </div>
+
+            <!--Lucro Líquido-->
+            <div class="p_indoor"> 
+                <div class="div_left_text_comum">${(ax_venda_comum-ax_custo_comum).toFixed(2)}</div>
+                <div class="color"> 
+                    <div class="color_blue" style="width: ${(ax_venda_comum-ax_custo_comum)*100/(ax_venda_comum-ax_custo_comum+ax_venda_indoor-ax_custo_indoor)}%; background-color: rgb(155, 187, 89); height: 100%;" ></div>
+                    <div class="color_red">
+                        <div class="div_text"> Lucro Líquido </div>
+                    </div>
+                </div> 
+                <div class="div_right_text_indoor">${(ax_venda_indoor-ax_custo_indoor).toFixed(2)}</div>
+            </div>`
+    }
+
+</script>

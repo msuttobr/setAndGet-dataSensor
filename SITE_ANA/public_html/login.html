@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="./css/cadastro_login.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="./index.html">
+                        <img src="img/logo.png" width="100%">
+                    </a>
+                </div>
+                <div class="navigation">
+                    <ul>
+                        <li><a href="./index.html#quem-somos">Quem somos</a></li>
+                        <li><a href="./index.html#proposito">Propósito</a></li>
+                        <li><a href="./simulador-financeiro.html">Simulador Financeiro</a></li>
+                        <li><a href="">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="conteudo">
+        <div class="login">
+            <h1>Login</h1>
+            <div>
+                E-mail<br>
+                <input id="ipt_email_login" type="text" placeholder="digite o e-mail ">
+            </div>
+            <div>
+                Digite sua senha <br>
+                <input id="ipt_senha_login" type="password" placeholder="senha">
+            </div>
+
+            <button class="button" onclick="acessar()">ACESSAR</button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    function acessar() {
+        var ax_email_OK = ipt_email_login.value.length >= 6 && ipt_email_login.value.includes("@");
+        var ax_senha_OK = ipt_senha_login.value.length >= 6;
+
+        if (ax_email_OK && ax_senha_OK) {
+            window.location.href = "dashboard/dashboard.html";
+        }
+
+        else if (ax_email_OK == false) {
+            alert("E-mail inválido!")
+        }
+
+        else if (ax_senha_OK == false) {
+            alert("A senha precisa ter no mínimo 6 caracteres!");
+        }
+
+
+    }
+</script>

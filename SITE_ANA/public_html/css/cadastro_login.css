@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+/* Header */
+.container {
+    max-width: 1140px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+.container > .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-content .logo {
+    width: 100px;
+    height: 100px;
+}
+.header-content  .navigation {
+}
+.header-content > .navigation > ul {
+    display: flex;
+    list-style-type: none;
+}
+.header-content > .navigation ul li a {
+    display: block;
+    text-decoration: none;
+    padding: 16px;
+    font-size: 24px;
+    color: #7F7F7F;
+    font-weight: bold;
+}
+
+/* Footer */
+.footer_botoes {
+    height: 120px;
+    background-color: rgb(182, 221, 232);
+    display: flex;
+    flex-direction: row;
+}
+
+.footer_home {
+    height: 120px;
+    width: 11%;
+    background-color: rgb(182, 221, 232);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_email {
+    height: 120px;
+    width: 11%;
+    background-color: rgb(245, 244, 178);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_gps {
+    height: 120px;
+    width: 11%;
+    background-color: rgb(233, 147, 187);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_graficos {
+    height: 120px;
+    width: 11%;
+    background-color: rgb(177, 196, 140);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_simulador {
+    height: 120px;
+    width: 11%;
+    background-color: rgb(245, 244, 178);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+}
+
+/* Páginas de cadastro e login */
+.conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastro_empresa,
+.cadastro_usuario,
+.login {
+    background-color: rgb(194, 214, 154);
+    width: 400px;
+    height: 500px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: solid 3px;
+    border-radius: 50px;
+    border-color: rgb(155, 187, 89);
+    color: white;
+    font-weight: bolder;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.login {
+    width: 350px;
+    height: 350px;
+}
+
+.cadastro_empresa input,
+.cadastro_usuario input,
+.login input {
+    width: 250px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: solid 1px;
+    border-color: white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.cadastro_empresa input::placeholder,
+.cadastro_usuario input::placeholder,
+.login input::placeholder {
+    color: rgb(167, 167, 167);
+    padding-left: 3px;
+}
+
+.button {
+    background-color: rgb(155, 187, 89);
+    color: white;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 15px;
+    border: rgb(155, 187, 89);
+    box-shadow: rgb(80, 90, 80) 5px 5px 5px;
+}
+
+.button:hover {
+    font-size: 22px;
+    transition-duration: 0.2s;
+}
