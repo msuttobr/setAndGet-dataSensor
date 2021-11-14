@@ -1,5 +1,6 @@
 const express = require('express');
 const connection = require('../database/connection');
+const Sensor = require('../model/Sensor');
 
 // const { ArduinoDataTemp } = require('../arduino/newserial');
 require('../arduino/newserial');
@@ -16,7 +17,7 @@ router.get('/', async (request, response, next) => {
 
     data.map(function(item) {
         item.temperatura = parseFloat(item.temperatura);
-        item.luminosidade = parseFloat(item.luminosidade);
+        item.luminosidade = parseFloat(item.umidade);
     });
 
     const sum = {
@@ -62,17 +63,25 @@ router.get('/', async (request, response, next) => {
     });
 });
 
+router.get('/reset', async (request, response, next) => {
+    Sensor.getInstance().reset();
+});
+
+// async function loadSensorData() {
+//     return new Promise((resolve, reject) => {
+//         connection.query(`SELECT id, temperatura, umidade as 'luminosidade', momento, fk_aquario FROM medida WHERE fk_aquario = 0 ORDER BY id DESC LIMIT 60;`, function(error, results, fields){
+//         // connection.query(`SELECT id, temperatura, umidade as 'luminosidade', momento, fk_aquario FROM medida WHERE fk_aquario = 0 ORDER BY id DESC;`, function(error, results, fields){
+//                 if(error){
+//                 throw new Error(error.sqlMessage);
+//             }
+//             resolve(results);
+//         });
+//     });
+// }
+
 
 async function loadSensorData() {
-    return new Promise((resolve, reject) => {
-        connection.query(`SELECT id, temperatura, umidade as 'luminosidade', momento, fk_aquario FROM medida WHERE fk_aquario = 0 ORDER BY id DESC LIMIT 60;`, function(error, results, fields){
-        // connection.query(`SELECT id, temperatura, umidade as 'luminosidade', momento, fk_aquario FROM medida WHERE fk_aquario = 0 ORDER BY id DESC;`, function(error, results, fields){
-                if(error){
-                throw new Error(error.sqlMessage);
-            }
-            resolve(results);
-        });
-    });
+    return Sensor.getInstance().list('DESC', 60, 0);
 }
 
 module.exports = router;

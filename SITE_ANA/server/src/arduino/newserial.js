@@ -2,6 +2,7 @@ const connection = require('../database/connection');
 
 const sensors = require('./sensors')
 const SerialPort = require("serialport");
+const Sensor = require('../model/Sensor');
 const Readline = SerialPort.parsers.Readline;
 
 class ArduinoRead {
@@ -23,20 +24,29 @@ class ArduinoRead {
     //     return this.listData2;
     // }
 
+    // saveSensorData(temperatura, luminosidade) {
+    //     return new Promise((resolve, reject) => {
+    //         connection.query(
+    //             `INSERT INTO medida (id, temperatura, umidade, momento, fk_aquario)
+    //             VALUES (NULL, ${temperatura}, ${luminosidade}, NOW(), 0)`,
+    //         function(error, results, fields){
+    //             if(error){
+    //                 throw new Error(error.sqlMessage);
+    //             }
+    //             resolve();
+    //         });
+    //     });
+    // }
     saveSensorData(temperatura, luminosidade) {
-        return new Promise((resolve, reject) => {
-            connection.query(
-                `INSERT INTO medida (id, temperatura, umidade, momento, fk_aquario)
-                VALUES (NULL, ${temperatura}, ${luminosidade}, NOW(), 0)`,
-            function(error, results, fields){
-                if(error){
-                    throw new Error(error.sqlMessage);
-                }
-                resolve();
-            });
+        const date = new Date();
+        const now = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+        return Sensor.getInstance().save({
+            temperatura,
+            umidade: luminosidade,
+            momento: now,
+            fk_aquario: 0
         });
     }
-
     fake_data() {
         setInterval(() => {
             let data_float = sensors.lm35(20, 30);
