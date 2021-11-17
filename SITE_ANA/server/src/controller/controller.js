@@ -1,6 +1,7 @@
 const express = require('express');
 const connection = require('../database/connection');
 const Sensor = require('../model/Sensor');
+const Usuario = require('../model/Usuario');
 
 // const { ArduinoDataTemp } = require('../arduino/newserial');
 require('../arduino/newserial');
@@ -65,8 +66,23 @@ router.get('/', async (request, response, next) => {
 
 router.get('/reset', async (request, response, next) => {
     Sensor.getInstance().reset();
+    response.json({
+        "resetado": true
+    });
 });
 
+router.post('/usuarios/cadastrar', async (request, response, next) => {
+    try {
+        await Usuario.getInstance().save({
+            nome: request.body.nome,
+            senha: request.body.senha,
+            email: request.body.email,
+        });
+        response.status(301).redirect(301, '/dashboard/dashboard.html');
+    } catch(e) {
+        response.status(301).redirect(301, '/login.html?error='+e.message);
+    }
+});
 // async function loadSensorData() {
 //     return new Promise((resolve, reject) => {
 //         connection.query(`SELECT id, temperatura, umidade as 'luminosidade', momento, fk_aquario FROM medida WHERE fk_aquario = 0 ORDER BY id DESC LIMIT 60;`, function(error, results, fields){
@@ -81,7 +97,7 @@ router.get('/reset', async (request, response, next) => {
 
 
 async function loadSensorData() {
-    return Sensor.getInstance().list('DESC', 60, 0);
+    return Sensor.getInstance().list("", 'DESC', 60, 0);
 }
 
 module.exports = router;

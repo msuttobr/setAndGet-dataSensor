@@ -41,10 +41,10 @@ class ArduinoRead {
         const date = new Date();
         const now = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
         return Sensor.getInstance().save({
-            temperatura,
+            temperatura: temperatura,
             umidade: luminosidade,
             momento: now,
-            fk_aquario: 0
+            fk_aquario: Math.round(Math.random() * 4)
         });
     }
     fake_data() {
@@ -142,9 +142,6 @@ class ArduinoRead {
 
                 console.log('data', dados[0]);
                 console.log('data2', dados[1]);
-
-                // this.listData.push(parseFloat(dados[0]));
-                // this.listData2.push(parseFloat(dados[1]));
             });
         }).catch(error => {
             console.log(error);

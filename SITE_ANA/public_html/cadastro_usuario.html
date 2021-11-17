@@ -33,21 +33,23 @@
 
     <div class="conteudo">
         <div class="cadastro_usuario">
-            <h1>CADASTRAR USUÁRIO</h1>
-            <div>
-                Digite um nome de usuário <br>
-                <input id="ipt_nome_usuario" type="text" placeholder="usuário">
-            </div>
-            <div>
-                Digite um email <br>
-                <input id="ipt_email_usuario" type="text" placeholder="e-mail">
-            </div>
-            <div>
-                Crie uma senha <br>
-                <input id="ipt_senha_usuario" type="password" placeholder="senha">
-            </div>
+            <form id="form_cadastro" method="post" action="/api/usuarios/cadastrar">
+                <h1>CADASTRAR USUÁRIO</h1>
+                <div>
+                    Digite um nome de usuário <br>
+                    <input id="ipt_nome_usuario" name="nome" type="text" placeholder="usuário">
+                </div>
+                <div>
+                    Digite um email <br>
+                    <input id="ipt_email_usuario" name="email" type="text" placeholder="e-mail">
+                </div>
+                <div>
+                    Crie uma senha <br>
+                    <input id="ipt_senha_usuario" name="senha" type="password" placeholder="senha">
+                </div>
 
-            <button class="button" onclick="cadastrar()">CADASTRAR</button>
+                <button class="button">CADASTRAR</button>
+            </form>
         </div>
     </div>
 </body>
@@ -89,7 +91,21 @@
             ipt_email_usuario.value = "";
             ipt_senha_usuario.value = "";
 
-            alert("Usuário cadastrado com sucesso")
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                body: formulario
+            }).then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    window.alert("Cadastro realizado com sucesso!");
+                    window.location = "login.html";
+                } else {
+                    throw("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
         }
     }
 </script>

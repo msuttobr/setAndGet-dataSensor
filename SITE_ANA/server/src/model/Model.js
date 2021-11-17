@@ -16,13 +16,19 @@ module.exports = class Model {
             });
         });
     }
-    list(order = 'ASC', limit = null, offset = 0) {
+    list(where = null, order = null, limit = null, offset = 0) {
         return new Promise((resolve, reject) => {
             let limitSql = "";
-            if(limit!==null) {
+            if(!where) {
+                where = "";
+            }
+            if(!order) {
+                order = "";
+            }
+            if(limit) {
                 limitSql = `LIMIT ${offset},${limit}`;
             }
-            connection.query(`SELECT * FROM ${this.table} ORDER BY id ${order} ${limitSql};`, function(error, results, fields){
+            connection.query(`SELECT * FROM ${this.table} ${where} ORDER BY id ${order} ${limitSql};`, function(error, results, fields){
                 if(error){
                     reject(error.sqlMessage);
                 }
@@ -40,18 +46,17 @@ module.exports = class Model {
             });
         });
     }
-
     save(object) {
         return new Promise((resolve, reject) => {
             let sql;
-            if (object.id) {
+            if(object.id) {
                 let updates = "";
                 for(let key in object) {
                     let value = object[key];
                     if(updates!="") {
                         updates+= ",";
                     }
-                    updates+= `${key} = '${value}'`;
+                    updates += `${key} = '${value}'`;
                 }
                 sql = `UPDATE ${this.table} SET ${updates}`;
             } else {

@@ -50,6 +50,8 @@
 </html>
 <script>
 
+    const msg = new URLSearchParams(document.location.search).get("error");
+    if(msg) alert(msg);
     function acessar() {
         var ax_email_OK = ipt_email_login.value.length >= 6 && ipt_email_login.value.includes("@");
         var ax_senha_OK = ipt_senha_login.value.length >= 6;
@@ -65,7 +67,6 @@
         else if (ax_senha_OK == false) {
             alert("A senha precisa ter no mínimo 6 caracteres!");
         }
-
 
     }
 </script>
